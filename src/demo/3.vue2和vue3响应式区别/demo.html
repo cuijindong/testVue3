@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 目标对象
+    const user = {
+      name: 'xiaopi',
+      age: 1,
+      wife: {
+        name: 'meiyou'
+      }
+    }
+    // 代理对象
+    const handler = {
+      get(target, prop) {
+        console.log('get')
+        return Reflect.get(target, prop)
+      },
+      set(target, prop, value) {
+        console.log('set')
+        return Reflect.set(target, prop, value)
+      },
+      deleteProperty(target, prop) {
+        console.log('delete')
+        return Reflect.deleteProperty(target, prop)
+      }
+    }
+    const proxy = new Proxy(user, handler)
+    console.log(proxy.name = 'choupi')
+    console.log(proxy.wife.name = 'xx')
+    console.log(proxy.name)
+    console.log(proxy.id = 232)
+    console.log(delete proxy.id)
+    console.log(user)
+  </script>
+</body>
+</html>
